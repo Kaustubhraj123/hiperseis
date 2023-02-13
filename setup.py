@@ -47,7 +47,7 @@ history = open('HISTORY.rst').read().replace('.. :changelog:', '')
 ellipcorr = Extension(
     name='ellipcorr',
     # add several modules files under the same extension
-    sources=['ellip-corr/ellip/ellipcorr.f']
+    sources=['ellip-corr/ellip/pyellip.f']
 )
 
 kennett_dist = Extension(
