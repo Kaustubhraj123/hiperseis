@@ -135,7 +135,7 @@ time_diff = station[0].stats.endtime - station[0].stats.starttime
 # number of running windows to process
 # McNamara uses 75% overlap
 time_shift=time_win*0.25
-total_win = np.int(np.ceil(time_diff / (time_shift)))
+total_win = int(np.ceil(time_diff / (time_shift)))
 #print '---', total_win,time_diff,t_w
 station.merge(method=0,fill_value='interpolate',interpolation_samples=0)
 if isinstance(station[0].data,np.ma.masked_array):
@@ -184,8 +184,8 @@ hnm_cntrl = np.array(hnm)[::-1]
 hnm_per = np.array(x_hnm)[::-1]
 lnm_cntrl = np.array(lnm)[::-1]
 lnm_per = np.array(x_lnm)[::-1]
-hr = np.int(time_diff / 3600.)
-mn = np.int((time_diff - hr * 3600) / 60.)
+hr = int(time_diff / 3600.)
+mn = int((time_diff - hr * 3600) / 60.)
 sec = time_diff - hr * 3600 - mn * 60
 print "Loaded ", hr, " hr ", mn, " min ", sec, " sec of waveform data."
 print "It will analyze ", total_win - 1, " windows of ", time_win, " sec length"
@@ -198,7 +198,7 @@ for i in xrange(total_win - 1):
     data_slice = station[0].slice(t_start + i * time_shift, t_start + (i*time_shift + time_win)).copy()
     data_slice=sg.detrend(data_slice.data)
     num = np.size(data_slice)
-    n_total=np.power(2,np.int(np.log2(num))+1)
+    n_total=np.power(2,int(np.log2(num))+1)
     if num > 0:
         taper = np.hanning(np.size(data_slice))
         data_slice=(data_slice-np.mean(data_slice))*taper

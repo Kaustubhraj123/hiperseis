@@ -73,7 +73,7 @@ def get_utm_epsg(ccp_vol):
 
     lon = np.mean(coords[:,0])
     lat = np.mean(coords[:,1])
-    utm_band = str(np.int(((np.floor((lon + 180) / 6) % 60) + 1)))
+    utm_band = str(int(((np.floor((lon + 180) / 6) % 60) + 1)))
 
     epsg_code = None
     if len(utm_band) == 1:
@@ -176,9 +176,9 @@ def process(rf_h5_file, output_sgrid_file, start, end, epsg_code, extend, dx, dy
     eu = np.array(proj(e[0], e[1]))
 
     # initialize grid
-    nx = np.int(np.fabs(eu[0] - su[0]) / dx / 1e3) + 1
-    ny = np.int(np.fabs(eu[1] - su[1]) / dy / 1e3) + 1
-    nz = np.int(max_depth / dz) + 1
+    nx = int(np.fabs(eu[0] - su[0]) / dx / 1e3) + 1
+    ny = int(np.fabs(eu[1] - su[1]) / dy / 1e3) + 1
+    nz = int(max_depth / dz) + 1
 
     xs = np.linspace(su[0], eu[0], nx)
     ys = np.linspace(su[1], eu[1], ny)

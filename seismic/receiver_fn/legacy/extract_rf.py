@@ -151,7 +151,7 @@ Value of "a" | Frequency (hz) at which G(f) = 0.1 |  Approximate Pulse Width (s)
             # however first we define general plotting scheme and plot previous results
             fig = plt.figure(figsize=(11.69,8.27))
             columns=2
-            rows=np.int(np.ceil(float(max_grp)/float(columns)))+1
+            rows=int(np.ceil(float(max_grp)/float(columns)))+1
             grid=gridspec.GridSpec(columns,rows,wspace=0.2,hspace=0.2)
             ax=plt.subplot(grid[0])
             ax.plot(time_s,stacked[0].data)

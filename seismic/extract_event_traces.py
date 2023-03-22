@@ -449,7 +449,7 @@ def extract_data(catalog, inventory, waveform_getter, event_trace_datafile,
         njob = len(temp_dict) # total number of stations
         # Add made up entries to ensure MPI-barrier calls are balanced across all
         # processors
-        nbogus = np.int(np.ceil(njob/float(nproc)))*nproc - njob
+        nbogus = int(np.ceil(njob/float(nproc)))*nproc - njob
         for i in np.arange(nbogus): temp_dict['%i.%i.%i'%(i, i, i)] = '-1'
 
         cproc = 0
