@@ -1,3 +1,6 @@
 requests-mock
 pytest>=4.6.5
 pyyaml
+PyPDF2
+future
+rtree
