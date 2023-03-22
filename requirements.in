@@ -40,3 +40,5 @@ tqdm
 ujson
 urllib3
 xlrd
+future
+rtree
