@@ -30,7 +30,7 @@ pyyaml
 PyYAML>=3.11
 rasterio
 requests
-rf
+rf==0.8.0
 scikit-learn
 scipy>=0.15.1
 shapely --no-binary=shapely
