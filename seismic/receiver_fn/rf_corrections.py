@@ -55,8 +55,8 @@ class Corrections:
                     # end if
                 # end for
                 if (not found):
-                    assert 0, 'Station {} in config:correction:swap_ne block not ' \
-                              'found in input dataset'.format(item)
+                    print('Station {} in config:correction:swap_ne block not found in input dataset'.format(item))
+                    self._corrections['swap_ne'][hdf_item] = False
                 # end if
             # end for
         except Exception as e:
@@ -78,8 +78,8 @@ class Corrections:
                     # end if
                 # end for
                 if (not found):
-                    assert 0, 'Station {} in config:correction:rotate block not ' \
-                              'found in input dataset'.format(item)
+                    print('Station {} in config:correction:rotate block not found in input dataset'.format(item))
+                    self._corrections['rotate'][hdf_item] = False
                 # end if
             # end for
         except Exception as e:
@@ -101,8 +101,8 @@ class Corrections:
                     # end if
                 # end for
                 if (not found):
-                    assert 0, 'Station {} in config:correction:negate block not ' \
-                              'found in input dataset'.format(item)
+                    print('Station {} in config:correction:negate block not found in input dataset'.format(item))
+                    self._corrections['negate'][hdf_item] = []
                 # end if
             # end for
         except Exception as e:
