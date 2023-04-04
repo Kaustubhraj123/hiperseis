@@ -42,13 +42,13 @@ class Corrections:
         if (type(self._negate_list) != list): assert 0, 'config:correction: Expected a list of net.sta.loc.cha for key: negate'
 
         # NE channel swaps
+        if (not self._corrections['swap_ne']): self._corrections['swap_ne'] = defaultdict(bool)
         try:
             for item in self._swap_ne_list:
                 net, sta, loc = item.split('.')
                 found = False
                 for hdf_item in hdf_keys:
                     if ('.'.join([net, sta, loc]) == hdf_item):
-                        if (not self._corrections['swap_ne']): self._corrections['swap_ne'] = defaultdict(bool)
                         self._corrections['swap_ne'][hdf_item] = True
                         found = True
                         break
@@ -65,13 +65,13 @@ class Corrections:
         # end try
 
         # Rotations
+        if (not self._corrections['rotate']): self._corrections['rotate'] = defaultdict(bool)
         try:
             for item in self._rotate_list:
                 net, sta, loc = item.split('.')
                 found = False
                 for hdf_item in hdf_keys:
                     if ('.'.join([net, sta, loc]) == hdf_item):
-                        if (not self._corrections['rotate']): self._corrections['rotate'] = defaultdict(bool)
                         self._corrections['rotate'][hdf_item] = True
                         found = True
                         break
@@ -88,13 +88,13 @@ class Corrections:
         # end try
 
         # Negations
+        if (not self._corrections['negate']): self._corrections['negate'] = defaultdict(list)
         try:
             for item in self._negate_list:
                 net, sta, loc, cha = item.split('.')
                 found = False
                 for hdf_item in hdf_keys:
                     if ('.'.join([net, sta, loc]) == hdf_item):
-                        if (not self._corrections['negate']): self._corrections['negate'] = defaultdict(list)
                         self._corrections['negate'][hdf_item].append = cha[-1]
                         found = True
                         break
