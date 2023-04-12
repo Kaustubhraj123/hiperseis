@@ -247,7 +247,8 @@ CONTEXT_SETTINGS = dict(help_option_names=['-h', '--help'])
 @click.argument('output-file', type=click.Path(dir_okay=False), required=True)
 @click.option('--network-list', default='*', help='A space-separated list of networks (within quotes) to process.', type=str,
               show_default=True)
-@click.option('--station-list', default='*', help='A space-separated list of stations (within quotes) to process.', type=str,
+@click.option('--station-list', default='*', help='A space-separated list of stations (within quotes) or a text file '
+                                                  'with station names in each row, w/wo location codes.', type=str,
               show_default=True)
 @click.option('--event-mask-folder', type=click.Path(dir_okay=True, exists=True, file_okay=False),
               help='Folder containing event masks to use to filter traces. Such masks are generated '
@@ -685,7 +686,22 @@ def main(input_file, output_file, network_list='*', station_list='*', event_mask
             colnames = ['Longitude', 'Latitude'] + list(itertools.chain.from_iterable(colnames))
             df.columns = colnames
             df.index.name = 'Station'
-            df.to_csv(fname)
+
+            # write formatted csv file (not currently supported by pandas)
+            hcolnames = ['Station'] + colnames
+
+            hformatter = '{:>15s}, ' + ', '.join(['{:>10s}']*len(hcolnames[1:])) + '\n'
+            lineformatter = '{:>15s}, ' + ', '.join(['{:>10.3f}']*len(hcolnames[1:])) + '\n'
+
+            header = hformatter.format(*hcolnames)
+            with open(fname, 'w+') as fh:
+                fh.write(header)
+                for irow in np.arange(len(df)):
+                    line = lineformatter.format(df.index[irow],
+                                                *tuple(df.values[irow, :])).replace('nan', '   ')
+                    fh.write(line)
+                # end for
+            # end with
         # end for
 
         # gather pdf-names, flatten list and merge pdfs
